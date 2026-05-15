@@ -37,9 +37,17 @@ export class Carta {
     return JSON.stringify(this);
   }
 
-  createFromJsonString(json) {
+  static createFromJsonString(json) {
     const datos = JSON.parse(json);
     return new Carta(datos.code, datos.value, datos.suit, datos.image);
+  }
+
+  static guardarCarta(carta) {
+    const cartasGuardadas = JSON.parse(localStorage.getItem("cartas")) || [];
+    cartasGuardadas.push(carta);
+    localStorage.setItem("cartas", JSON.stringify(cartasGuardadas));
+    console.log("las cartas fueron cargadas");
+    console.log(cartasGuardadas);
   }
 
   createHtmlElement() {
@@ -59,11 +67,24 @@ export class Carta {
     const valor = document.createElement("p");
     valor.textContent = `el valor es: ${this.value}`;
 
+    /*6.(2pts) Modificar el retorno del método createHtmlElement() para que: 
+a. Al clickear la imagen, se abre en otra pestaña el link contenido en el atributo url de la clase Carta. 
+b. Agregar un botón debajo de la información de la serie que posea el texto “guardar” y llame al método guardarCarta(). 
+ */
+    const urlImagen = document.createElement("a");
+    urlImagen.href = this.image;
+    urlImagen.target = "_blank";
+
+    urlImagen.appendChild(imagen);
     div.appendChild(codigo);
-    div.appendChild(imagen);
     div.appendChild(palo);
     div.appendChild(valor);
+    div.appendChild(urlImagen);
 
+    const botonGuardar = document.createElement("button");
+    botonGuardar.textContent = "Guardar";
+    botonGuardar.onclick = () => Carta.guardarCarta(this);
+    div.appendChild(botonGuardar);
     return div;
   }
 }
