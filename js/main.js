@@ -34,7 +34,21 @@ async function cargarCartas(pagina) {
     alert("ocurrio un error:" + error.message);
   }
 }
+function paginaSiguiente() {
+  paginaActual++;
+  cargarCartas(paginaActual);
+}
+function paginaAtras() {
+  paginaActual--;
+  cargarCartas(paginaActual);
+}
 
 document.addEventListener("DOMContentLoaded", () => {
+  document
+    .getElementById("siguiente")
+    .addEventListener("click", paginaSiguiente);
+
+  document.getElementById("anterior").addEventListener("click", paginaAtras);
+
   cargarCartas(paginaActual);
 });
