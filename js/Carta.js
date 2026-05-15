@@ -7,7 +7,7 @@ ii. createFromJsonString(json) De clase. Devuelve una instancia de la clase Cart
 iii. createHtmlElement(). De instancia. Devuelve un elemento HTML que permita mostrar del  documento los datos: code, imagen(recuperar del url), suit, value.*/
 
 export class Carta {
-  constructor(code, value, suit, imagen) {
+  constructor(code, value, suit, image) {
     if (code == null || typeof code != "string") {
       throw new Error(
         "no puede tener una cadena de texto vacia o no ser texto",
@@ -22,7 +22,7 @@ export class Carta {
         "el suit no puede ser vacio y tiene q ser una cadena de texto",
       );
     }
-    if (imagen == null || typeof imagen != "string") {
+    if (image == null || typeof image != "string") {
       throw new Error(
         "la imagen no puede estar vacia y tine q ser una cadena de texto",
       );
@@ -30,7 +30,7 @@ export class Carta {
     this.code = code;
     this.value = value;
     this.suit = suit;
-    this.imagen = imagen;
+    this.image = image;
   }
   //   metodos
   toJsonString() {
@@ -39,7 +39,7 @@ export class Carta {
 
   createFromJsonString(json) {
     const datos = JSON.parse(json);
-    return new Carta(datos.code, datos.value, datos.suit, datos.imagen);
+    return new Carta(datos.code, datos.value, datos.suit, datos.image);
   }
 
   createHtmlElement() {
@@ -50,7 +50,7 @@ export class Carta {
     codigo.textContent = this.code;
 
     const imagen = document.createElement("img");
-    imagen.src = this.imagen;
+    imagen.src = this.image;
     imagen.style.maxWidth = "150px";
 
     const palo = document.createElement("p");
@@ -58,5 +58,12 @@ export class Carta {
 
     const valor = document.createElement("p");
     valor.textContent = `el valor es: ${this.value}`;
+
+    div.appendChild(codigo);
+    div.appendChild(imagen);
+    div.appendChild(palo);
+    div.appendChild(valor);
+
+    return div;
   }
 }
