@@ -29,7 +29,20 @@ nav {
   margin: 3rem;
   gap: 1rem;
 }
+#contenedorCartas {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  margin: 3rem;
+  gap: 1rem;
+}
 
+#anterior,
+#siguiente {
+  padding: 10px;
+  border-radius: 2rem;
+  margin-left: 5rem;
+}
 @media (min-width: 550px) {
   #cartas {
     grid-template-columns: repeat(2, 1fr);
