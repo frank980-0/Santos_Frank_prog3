@@ -18,6 +18,12 @@ header {
 nav {
   grid-area: nav;
 }
+nav a {
+  background-color: aliceblue;
+  border-radius: 12px;
+  text-decoration: none;
+  padding: 10px;
+}
 
 #principal {
   grid-area: principal;
